@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mudbone Music — EPK Deliverables</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900&family=Lato:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:  #0A0806;
+    --iron:   #1C150E;
+    --card:   #221A10;
+    --amber:  #C8901A;
+    --amber-lt:#E8B040;
+    --blood:  #8B1A1A;
+    --blood-lt:#B22222;
+    --bone:   #F2EDE4;
+    --muted:  #A89880;
+    --white:  #FDFAF5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--bone);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+  }
+
+  /* Red top stripe */
+  .top-stripe {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(to right, var(--blood), var(--amber), var(--blood));
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid rgba(200,144,26,0.22);
+    border-top: 3px solid var(--blood);
+    border-radius: 6px;
+    width: 100%;
+    max-width: 560px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  }
+
+  /* Logo */
+  .logo-wrap {
+    margin-bottom: 2rem;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-wrap img {
+    width: min(280px, 70%);
+    height: auto;
+    filter: drop-shadow(0 0 24px rgba(200,144,26,0.5));
+  }
+
+  .logo-fallback {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 0.06em;
+    filter: drop-shadow(0 0 20px rgba(200,144,26,0.4));
+  }
+
+  /* Divider */
+  .rule {
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(to right, var(--blood), var(--amber));
+    margin: 0 auto 1.8rem;
+  }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-family: 'Special Elite', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.38em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* Headline */
+  .headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .subline {
+    font-size: 0.86rem;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  /* EPK Buttons */
+  .epk-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .epk-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.5rem;
+    background: var(--iron);
+    border: 1px solid rgba(200,144,26,0.25);
+    border-left: 3px solid var(--blood);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--bone);
+    transition: border-color 0.22s, background 0.22s, transform 0.22s;
+  }
+
+  .epk-btn:hover {
+    border-color: var(--amber);
+    border-left-color: var(--blood-lt);
+    background: rgba(200,144,26,0.07);
+    transform: translateY(-2px);
+  }
+
+  .epk-btn-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .epk-btn-label {
+    font-family: 'Special Elite', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    color: var(--blood-lt);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .epk-btn-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .epk-btn-arrow {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(200,144,26,0.35);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .epk-btn:hover .epk-btn-arrow {
+    background: var(--amber);
+    border-color: var(--amber);
+  }
+
+  .epk-btn-arrow svg {
+    width: 13px;
+    height: 13px;
+    stroke: var(--amber);
+    fill: none;
+    transition: stroke 0.2s;
+  }
+
+  .epk-btn:hover .epk-btn-arrow svg { stroke: var(--black); }
+
+  /* Footer */
+  .footer-rule {
+    border: none;
+    border-top: 1px solid rgba(200,144,26,0.15);
+    margin-bottom: 1.4rem;
+  }
+
+  .mmg-credit {
+    font-family: 'Special Elite', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    color: rgba(168,152,128,0.45);
+    text-transform: uppercase;
+  }
+
+  .mmg-credit a {
+    color: rgba(200,144,26,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .mmg-credit a:hover { color: var(--amber); }
+</style>
+</head>
+<body>
+
+<div class="top-stripe"></div>
+
+<div class="card">
+
+  <div class="logo-wrap">
+    <img
+      src="https://lh3.googleusercontent.com/d/1NhLKzIRg-hA8RJsEbqnOiS6Ip5We8zpV"
+      alt="Mudbone Music"
+      onerror="this.style.display='none'; document.getElementById('logofallback').style.display='block'"
+    >
+    <span id="logofallback" class="logo-fallback" style="display:none">MUDBONE</span>
+  </div>
+
+  <div class="rule"></div>
+
+  <span class="eyebrow">Electronic Press Kits</span>
+  <h1 class="headline">Mudbone Music</h1>
+  <p class="subline">Select the EPK version below for your booking inquiry.</p>
+
+  <div class="epk-list">
+
+    <a class="epk-btn" href="https://mcdowellmediagroup.github.io/Mudbone-Casino-Festival-EPK" target="_blank" rel="noopener">
+      <div class="epk-btn-left">
+        <span class="epk-btn-label">Version 1</span>
+        <span class="epk-btn-title">Casino &amp; Festival EPK</span>
+      </div>
+      <div class="epk-btn-arrow">
+        <svg viewBox="0 0 14 14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 7h10M7 2l5 5-5 5"/>
+        </svg>
+      </div>
+    </a>
+
+    <a class="epk-btn" href="https://mcdowellmediagroup.github.io/Mudbone-Venue-Bar-EPK" target="_blank" rel="noopener">
+      <div class="epk-btn-left">
+        <span class="epk-btn-label">Version 2</span>
+        <span class="epk-btn-title">Venue &amp; Bar EPK</span>
+      </div>
+      <div class="epk-btn-arrow">
+        <svg viewBox="0 0 14 14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 7h10M7 2l5 5-5 5"/>
+        </svg>
+      </div>
+    </a>
+
+  </div>
+
+  <hr class="footer-rule">
+  <p class="mmg-credit">Produced by <a href="https://mcdowellmediagroup.com" target="_blank" rel="noopener">McDowell Media Group</a></p>
+
+</div>
+
+</body>
+</html>
